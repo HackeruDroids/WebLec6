@@ -1,0 +1,15 @@
+ .purple{
+     background: purple;
+     color: white;
+ }
+
+ .pink{
+     background: deeppink;
+     color: white;
+ }
+
+ .dashed{
+     border: 1px dashed white;
+     background: black;
+     color: white;
+ }
