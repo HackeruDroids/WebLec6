@@ -1,12 +1,14 @@
 var cards = ["bulbasaur", "charmander", "egg", "greatball", "masterball",
- "meowth", "pikachu", "pokeball", "premierball",
-  "snorlax", "squirtle", "wigglypuff"]
+    "meowth", "pikachu", "pokeball", "premierball",
+    "snorlax", "squirtle", "wigglypuff"]
 
 var randCards = []
 
 function render() {
     randomize()
+
     var out = document.getElementById("out") //div#out.row
+    out.classList.add('rotate')
     for (var i = 0; i < randCards.length; i++) {
         out.innerHTML += `<img height="200" class="col-3 card"
         id="${i}" onclick="flip(${i})"
@@ -18,16 +20,42 @@ function render() {
     ...
     */
 }
-
- 
-var isTheFirstCardFlipped = false
+var firstCard = null
 
 function flip(i) {
-    
     var cardTapped = document.getElementById(i)
     cardTapped.src = `pokemon/${randCards[i]}.png`
+
+
+
+    var currentCard = { index: i, imageName: randCards[i] }
+    
+    //if we already have one flipped card:
+    if (firstCard) {
+        // setTimeout(function(){
+            
+        //         },1000)
+
+        //compare firstCard to currentCard
+        if (currentCard.imageName == firstCard.imageName) {
+            alert('great!')
+        }else{
+            var e1 = document.getElementById(currentCard.index)
+            var e2 = document.getElementById(firstCard.index)
+            setTimeout(()=>{
+                e1.src = 'pokemon/back.png'
+                e2.src =  'pokemon/back.png'
+            }, 1000)
+        }
+        firstCard = null
+    } else {
+        //no first card yet
+        firstCard = currentCard
+    }
+
+   
 }
- 
+
 
 function randomize() {
     randCards = []
@@ -43,7 +71,7 @@ function randomize() {
     })
 
     //the most efficient: Fisher-Yates
-    for(var i = 0; i < randCards.length; i++){
+    for (var i = 0; i < randCards.length; i++) {
         var rand = Math.floor(Math.random() * randCards.length)
 
         var c = randCards.splice(rand, 1)[0];
@@ -52,21 +80,21 @@ function randomize() {
 }
 
 
-function removeItemSplice(){
+function removeItemSplice() {
     var fruits = ["Banana", "Orange", "Apple", "Mango"];
     //we want to remove the "Orange"
     //orange index is 1 -> start from 1
     var o = fruits.splice(1/*start*/, 1/*deleteCount*/)
-  
+
     document.getElementById("out").innerHTML = o;
-    document.getElementById("out").innerHTML += "<br>" +  fruits;
+    document.getElementById("out").innerHTML += "<br>" + fruits;
 }
 
-function addItemSplice(){
+function addItemSplice() {
     var fruits = ["Banana", "Orange", "Apple", "Mango"];
     //we want to remove the "Orange"
     //orange index is 1 -> start from 1
-     fruits.splice(4/*start*/, 10/*deleteCount*/, "Kiwi") //add the kiwi to the end
- 
-    document.getElementById("out").innerHTML += "<br>" +  fruits;
+    fruits.splice(4/*start*/, 10/*deleteCount*/, "Kiwi") //add the kiwi to the end
+
+    document.getElementById("out").innerHTML += "<br>" + fruits;
 }

@@ -13,3 +13,19 @@
      background: black;
      color: white;
  }
+
+.red.box {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+ .rotate{
+    animation-name: rotate;
+    animation-duration:1s;
+    animation-fill-mode: forwards;
+ }
+
+@keyframes rotate {
+    0%   {transform:rotateZ(-120deg);}
+    100%   {transform:rotateZ(120deg);}
+}
